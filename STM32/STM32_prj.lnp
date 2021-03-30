@@ -1,0 +1,6 @@
+--cpu Cortex-M3
+".\main.o"
+--strict --scatter ".\STM32_prj.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\STM32_prj.map" -o .\STM32_prj.axf

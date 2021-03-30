@@ -1,0 +1,61 @@
+
+3/22 学习笔记
+
+1、RT-Thread 操作系统的邮箱可用于线程间通信
+代码如下：
+struct rt_mailbox 
+{
+    struct rt_ipc_object parent ;
+    rt_uint32_t  *msg_pool;
+    rt_uint16_t   size;
+    rt_unit16_t  entry;
+    rt_unit16_t  in_offset;
+    rt_list_t suspend_sender_thread;
+
+};
+
+定义静态邮箱：
+struct rt_mailbox static_inb;
+定义动态邮箱：
+rt_mailbox_t dynamic_mb;
+
+消息队列：
+RT-Thread 常用的的线程间通信方式
+
+
+2、软件定时器：
+软件定时器是由操作系统提供的一类系统接口；
+软件定时器使系统能够提供不受数目限制的定时器服务
+
+RT-Thread操作系统提供的软件定时器，以系统节拍的时间长度为定时单位，提供了
+基于系统节拍整数倍的定时能力，即定时数值OSTick的整数倍。
+
+3、内存池：
+一种内存分配方式
+动态内存堆：
+可以分配任意大小的内存块，非常灵活和方便。
+缺点：分配效率不高每次分配时都要进行空闲内存块查找；二是容易产生内存碎片。
+
+内存池是一种内存分配方式，用于分配大量大小相同的小内存块。使用内存池可以极大地加快
+内存分配和释放的速度，且能尽量避免内存碎片化。
+
+RT-Thread 的内存池支持线程挂起功能，当内存池中无空间内存块时，申请线程会被挂起，直到
+内存池有新的可用的内存块，再将挂起的线程唤醒。
+
+4、了解ARM内核处理器发展史，内核分类及命名方式
+
+从1983年开始，ARM内核共有ARM1、ARM2、ARM6、ARM7、ARM9、ARM10、ARM11和
+cortex系列包括（ARM Cortex-A、arm Cortex-M、arm Cortex-R ）。
+ARM处理器分为经典的ARM处理器和最新的Cortex处理器。
+cortex A系列：
+支持大型嵌入式系统，如手机
+节能：A5，A7
+平衡：A8,   A9
+性能：A15 ，A17
+cortex R系列，Real-time 处理器，即执行一个指令段的耗时是固定时钟周期数，用于高端的嵌入式系统，
+尤其是那些带有实时要求的-又要快又要实时。用于汽车控制。
+cortex M系列
+超低的功耗 单片机市场
+
+
+
